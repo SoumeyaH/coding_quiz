@@ -69,6 +69,12 @@ function appendQuizCompleteContainer() {
 
 function callback(event) {
   event.preventDefault();
+  //to do
+  // get score
+  // get initials from input
+  // make string initials + score
+  // store that in local
+  // navigate to high-score.html
 }
 
 const startQuiz = () => {
@@ -80,3 +86,17 @@ const startQuiz = () => {
 
 startButton.addEventListener("click", startQuiz);
 submitScoreButtonElement.addEventListener("click", callback);
+
+{
+  /* <div class="question-one-container">
+      <h2>question 1</h2>
+      <h3>the actual question</h3>
+      <div class="answers-one-container">
+  to do do make a flex box but answers two in a line, under 768 column
+        <button id="answer 0">answer 0</button>
+        <button id="answer 1">answer 1</button>
+        <button id="answer 2">answer 2</button>
+        <button id="answer 3">answer 3</button>
+      </div>
+    </div> */
+}
