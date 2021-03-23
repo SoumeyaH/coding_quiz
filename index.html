@@ -37,13 +37,41 @@
       sizes="16x16"
       href="./assets/images/favicon/favicon-16x16.png"
     />
-
-    Linking Stylesheets
-    <link rel="stylesheet" type="text/css" href="./assets/css/reset.css" />
      -->
+
+    <!-- Linking Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="./assets/css/reset.css" />
     <link rel="stylesheet" type="text/css" href="./assets/css/styles.css" />
   </head>
 
-  <script src="assets/js/scripts.js"></script>
-  <body></body>
+  <body>
+    <!-- header static  -->
+    <header class="header-container">
+      <div class="header-flex-items highscores-container">
+        <a href="to do">View High-scores</a>
+      </div>
+      <div class="header-flex-items timer-container">
+        Timer: <span>0</span> seconds
+      </div>
+    </header>
+
+    <!-- contents change dynamically  -->
+    <main class="main-container">
+      <!-- initial main section -->
+      <div>
+        <h1 class="main-initial-items">Coding quiz</h1>
+        <div class="main-initial-items">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, natus
+          illo! Totam est saepe amet in eius laudantium, fugiat quasi officia
+          dolorum consequuntur omnis numquam, deleniti assumenda, itaque
+          mollitia ratione!
+        </div>
+        <div class="main-initial-items">
+          <button>Start</button>
+        </div>
+      </div>
+    </main>
+
+    <script src="assets/js/scripts.js"></script>
+  </body>
 </html>
