@@ -43,3 +43,13 @@ startButton.addEventListener("click", startQuiz);
 //put in first quiz question
 
 //when time reaches 0 go to highscores form page
+
+{
+  /* <div>
+        <h2>Quiz Completed</h2>
+        <form action="">
+          <input type="text" placeholder="Enter Your Initials" />
+          <button>Submit</button>
+        </form>
+    </div> */
+}
