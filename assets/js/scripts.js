@@ -37,6 +37,7 @@ function timer() {
       console.log(timeLeft);
       countDownTimerElement.textContent = `times up`;
       clearInterval(timeInterval);
+      appendQuizCompleteContainer();
     }
   };
 
@@ -44,30 +45,38 @@ function timer() {
 }
 
 function appendQuizCompleteContainer() {
+  // to do stop event bubbling on submit button
+
+  //appending elements
+  mainContainerElement.appendChild(quizCompleteContainerElement);
   quizCompleteContainerElement.appendChild(quizCompleteHeadingElement);
   quizCompleteContainerElement.appendChild(quizCompleteFormElement);
   quizCompleteFormElement.appendChild(inputInitialsElement);
   quizCompleteFormElement.appendChild(submitScoreButtonElement);
+
+  // setting text content for elements
+  quizCompleteHeadingElement.textContent = "Quiz Completed";
+  submitScoreButtonElement.textContent = "Submit";
+
+  //setting attributes for elements
+  quizCompleteContainerElement.setAttribute("class", "quiz-complete-container");
+  quizCompleteHeadingElement.setAttribute("class", "quiz-complete-heading");
+  quizCompleteFormElement.setAttribute("class", "quiz-complete-form");
+  inputInitialsElement.setAttribute("class", "input-initials");
+  inputInitialsElement.setAttribute("placeholder", "Enter Your Initials Here");
+  submitScoreButtonElement.setAttribute("class", "submit-score-button");
+}
+
+function callback(event) {
+  event.preventDefault();
 }
 
 const startQuiz = () => {
   removeInitialContent();
   timer();
-  appendQuizCompleteContainer();
+  // when timer hits zero it invokes appendQuizCompleteContainer
+  // to do also add appendQuizCompleteContainer to final when final question answered
 };
 
 startButton.addEventListener("click", startQuiz);
-
-// start button is pressed
-// remove initial-items-container from main-container
-//put in first quiz question
-
-//when time reaches 0 go to highscores form page
-
-/* <div>
-        <h2>Quiz Completed</h2>
-        <form action="">
-          <input type="text" placeholder="Enter Your Initials" />
-          <button>Submit</button>
-        </form>
-    </div> */
+submitScoreButtonElement.addEventListener("click", callback);
