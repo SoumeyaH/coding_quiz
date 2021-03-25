@@ -37,6 +37,35 @@ function removeInitialContent() {
   initialItemsContainer.remove();
 }
 
+const appendQuizCompleteContainer = () => {
+  // to do stop event bubbling on submit button
+
+  const quizCompleteContainer = document.createElement("div");
+  const quizCompleteHeading = document.createElement("h2");
+  const quizCompleteForm = document.createElement("form");
+  const inputInitials = document.createElement("input");
+  const submitScoreButton = document.createElement("button");
+
+  //appending elements
+  mainContainer.appendChild(quizCompleteContainer);
+  quizCompleteContainer.appendChild(quizCompleteHeading);
+  quizCompleteContainer.appendChild(quizCompleteForm);
+  quizCompleteForm.appendChild(inputInitials);
+  quizCompleteForm.appendChild(submitScoreButton);
+
+  // setting text content for elements
+  quizCompleteHeading.textContent = "Quiz Completed";
+  submitScoreButton.textContent = "Submit";
+
+  //setting attributes for elements
+  quizCompleteContainer.setAttribute("class", "quiz-complete-container");
+  quizCompleteHeading.setAttribute("class", "quiz-complete-heading");
+  quizCompleteForm.setAttribute("class", "quiz-complete-form");
+  inputInitials.setAttribute("class", "input-initials");
+  inputInitials.setAttribute("placeholder", "Enter Your Initials Here");
+  submitScoreButton.setAttribute("class", "submit-score-button");
+};
+
 const createChoices = (choices) => {
   const answersContainerDiv = document.createElement("div");
 
@@ -59,8 +88,6 @@ const createChoices = (choices) => {
 const verifyChoice = (event) => {
   const target = event.target;
   const currentTarget = event.currentTarget;
-  console.log(target);
-  console.log(currentTarget);
 
   if (target.matches("button")) {
     const answer = target.dataset.answer;
@@ -95,8 +122,12 @@ const createQuestion = (question) => {
 };
 
 const renderQuestion = () => {
-  const questionContainer = createQuestion(questions[index]);
-  mainContainer.appendChild(questionContainer);
+  if (index < questions.length) {
+    const questionContainer = createQuestion(questions[index]);
+    mainContainer.appendChild(questionContainer);
+  } else {
+    appendQuizCompleteContainer();
+  }
 };
 
 const timer = () => {
