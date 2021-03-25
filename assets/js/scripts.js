@@ -31,7 +31,7 @@ const questions = [
 
 // declaring variables in global
 countDownTimer.textContent = "60 seconds left";
-let index = 0;
+let questionIndex = 0;
 
 function removeInitialContent() {
   initialItemsContainer.remove();
@@ -41,30 +41,31 @@ const appendQuizCompleteContainer = () => {
   // to do stop event bubbling on submit button
 
   const quizCompleteContainer = document.createElement("div");
+  quizCompleteContainer.setAttribute("class", "quiz-complete-container");
+
   const quizCompleteHeading = document.createElement("h2");
+  quizCompleteHeading.setAttribute("class", "quiz-complete-heading");
+
   const quizCompleteForm = document.createElement("form");
+  quizCompleteForm.setAttribute("class", "quiz-complete-form");
+  quizCompleteHeading.textContent = "Quiz Completed";
+
   const inputInitials = document.createElement("input");
+  inputInitials.setAttribute("class", "input-initials");
+  inputInitials.setAttribute("placeholder", "Enter Your Initials Here");
+
   const submitScoreButton = document.createElement("button");
+  submitScoreButton.setAttribute("class", "submit-score-button");
+  submitScoreButton.textContent = "Submit";
 
   //appending elements
   mainContainer.appendChild(quizCompleteContainer);
 
   quizCompleteContainer.appendChild(quizCompleteHeading);
   quizCompleteContainer.appendChild(quizCompleteForm);
+
   quizCompleteForm.appendChild(inputInitials);
   quizCompleteForm.appendChild(submitScoreButton);
-
-  // setting text content for elements
-  quizCompleteHeading.textContent = "Quiz Completed";
-  submitScoreButton.textContent = "Submit";
-
-  //setting attributes for elements
-  quizCompleteContainer.setAttribute("class", "quiz-complete-container");
-  quizCompleteHeading.setAttribute("class", "quiz-complete-heading");
-  quizCompleteForm.setAttribute("class", "quiz-complete-form");
-  inputInitials.setAttribute("class", "input-initials");
-  inputInitials.setAttribute("placeholder", "Enter Your Initials Here");
-  submitScoreButton.setAttribute("class", "submit-score-button");
 };
 
 const createChoices = (choices) => {
@@ -95,11 +96,12 @@ const verifyChoice = (event) => {
     const correctAnswer = currentTarget.dataset.answer;
 
     if (answer === correctAnswer) {
-      index++;
+      questionIndex++;
       mainContainer.removeChild(document.getElementById("question"));
       renderQuestion();
     } else {
-      alert("sad times");
+      // alert("sad times");
+      countDownTimer -= 10;
       //to do cut time
     }
   }
@@ -123,8 +125,8 @@ const createQuestion = (question) => {
 };
 
 const renderQuestion = () => {
-  if (index < questions.length) {
-    const questionContainer = createQuestion(questions[index]);
+  if (questionIndex < questions.length) {
+    const questionContainer = createQuestion(questions[questionIndex]);
     mainContainer.appendChild(questionContainer);
   } else {
     appendQuizCompleteContainer();

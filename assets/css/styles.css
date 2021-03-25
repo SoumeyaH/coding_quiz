@@ -38,7 +38,7 @@ body {
 }
 
 /* to do why is media query not working on toggle view in browser  */
-@media screen and (max-width: 768px) {
+@media only screen and (max-width: 768px) {
   body {
     position: static;
   }
@@ -47,7 +47,6 @@ body {
   }
   .main-container {
     position: static;
-    width: 100vw;
     transform: translate(0%, 0%);
   }
 }
