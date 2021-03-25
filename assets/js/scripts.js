@@ -48,6 +48,7 @@ const appendQuizCompleteContainer = () => {
 
   //appending elements
   mainContainer.appendChild(quizCompleteContainer);
+
   quizCompleteContainer.appendChild(quizCompleteHeading);
   quizCompleteContainer.appendChild(quizCompleteForm);
   quizCompleteForm.appendChild(inputInitials);
@@ -131,7 +132,7 @@ const renderQuestion = () => {
 };
 
 const timer = () => {
-  let timeLeft = 3;
+  let timeLeft = 15;
 
   const callback = function () {
     if (timeLeft > 1) {
@@ -159,6 +160,10 @@ const startQuiz = () => {
 
   renderQuestion();
   timer();
+
+  //   mainContainer.removeChild(document.getElementById("question")); - used twice make function
+  // to do stop timer when last question answered
+  // penalise for wrong answer clicked
 };
 
 startButton.addEventListener("click", startQuiz);
