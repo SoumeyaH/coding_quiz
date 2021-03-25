@@ -9,7 +9,7 @@ const startButton = document.getElementById("initial-start-button");
 const questions = [
   {
     title: "Whats the best star trek show?",
-    choices: ["tos", "tas", "tng", "ds9", "voy"],
+    choices: ["tos", "tng", "ds9", "voy"],
     correctAnswer: "ds9",
   },
   {
@@ -22,10 +22,16 @@ const questions = [
     ],
     correctAnswer: "in the pale moonlight",
   },
+  {
+    title: "whose the best captain?",
+    choices: ["kirk", "picard", "sisko", "janeway"],
+    correctAnswer: "sisko",
+  },
 ];
 
 // declaring variables in global
 countDownTimer.textContent = "60 seconds left";
+let index = 0;
 
 function removeInitialContent() {
   initialItemsContainer.remove();
@@ -50,10 +56,31 @@ const createChoices = (choices) => {
   return answersContainerDiv;
 };
 
+const verifyChoice = (event) => {
+  const target = event.target;
+  const currentTarget = event.currentTarget;
+  console.log(target);
+  console.log(currentTarget);
+
+  if (target.matches("button")) {
+    const answer = target.dataset.answer;
+    const correctAnswer = currentTarget.dataset.answer;
+
+    if (answer === correctAnswer) {
+      index++;
+      mainContainer.removeChild(document.getElementById("question"));
+      renderQuestion();
+    } else {
+      alert("sad times");
+      //to do cut time
+    }
+  }
+};
+
 const createQuestion = (question) => {
   const divQuestionContainer = document.createElement("div");
   divQuestionContainer.setAttribute("id", "question");
-  divQuestionContainer.setAttribute("data-answer", "question.correctAnswer");
+  divQuestionContainer.setAttribute("data-answer", question.correctAnswer);
 
   const h2 = document.createElement("h2");
   h2.textContent = question.title;
@@ -62,11 +89,13 @@ const createQuestion = (question) => {
 
   divQuestionContainer.append(h2, choices);
 
+  divQuestionContainer.addEventListener("click", verifyChoice);
+
   return divQuestionContainer;
 };
 
-const renderQuestions = (question) => {
-  const questionContainer = createQuestion(question);
+const renderQuestion = () => {
+  const questionContainer = createQuestion(questions[index]);
   mainContainer.appendChild(questionContainer);
 };
 
@@ -95,7 +124,7 @@ const timer = () => {
 const startQuiz = () => {
   removeInitialContent();
 
-  questions.forEach(renderQuestions);
+  renderQuestion();
   // timer();
 };
 
