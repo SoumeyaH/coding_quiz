@@ -146,6 +146,8 @@ const timer = () => {
       console.log(timeLeft);
       countDownTimer.textContent = `times up`;
       clearInterval(timeInterval);
+      mainContainer.removeChild(document.getElementById("question"));
+      appendQuizCompleteContainer();
     }
   };
 
@@ -156,7 +158,7 @@ const startQuiz = () => {
   removeInitialContent();
 
   renderQuestion();
-  // timer();
+  timer();
 };
 
 startButton.addEventListener("click", startQuiz);
