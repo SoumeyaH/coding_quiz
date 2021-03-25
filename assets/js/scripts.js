@@ -9,8 +9,18 @@ const startButton = document.getElementById("initial-start-button");
 const questions = [
   {
     title: "Whats the best star trek show?",
-    choices: ["tos", "tng", "ds9", "voy"],
+    choices: ["tos", "tas", "tng", "ds9", "voy"],
     correctAnswer: "ds9",
+  },
+  {
+    title: "whats the best ds9 episode?",
+    choices: [
+      "in the pale moonlight",
+      "the visitor",
+      "little green men",
+      "rejoined",
+    ],
+    correctAnswer: "in the pale moonlight",
   },
 ];
 
@@ -26,14 +36,17 @@ const createChoices = (choices) => {
 
   const createChoice = (choice) => {
     const div = document.createElement("div");
+
     const button = document.createElement("button");
     button.setAttribute("data-answer", choice);
     button.textContent = choice;
+
     div.appendChild(button);
     answersContainerDiv.appendChild(div);
   };
 
   choices.forEach(createChoice);
+
   return answersContainerDiv;
 };
 
@@ -43,10 +56,18 @@ const createQuestion = (question) => {
   divQuestionContainer.setAttribute("data-answer", "question.correctAnswer");
 
   const h2 = document.createElement("h2");
-  h2.textContent = "question.title";
+  h2.textContent = question.title;
+
   const choices = createChoices(question.choices);
+
   divQuestionContainer.append(h2, choices);
-  console.log(divQuestionContainer);
+
+  return divQuestionContainer;
+};
+
+const renderQuestions = (question) => {
+  const questionContainer = createQuestion(question);
+  mainContainer.appendChild(questionContainer);
 };
 
 const timer = () => {
@@ -73,7 +94,8 @@ const timer = () => {
 
 const startQuiz = () => {
   removeInitialContent();
-  createQuestion(questions[0]);
+
+  questions.forEach(renderQuestions);
   // timer();
 };
 
