@@ -103,7 +103,7 @@ const verifyChoice = (event) => {
       mainContainer.removeChild(document.getElementById("question"));
       renderQuestion();
     } else {
-      // alert("sad times");
+      alert("sad times");
       // countDownTimer -= 10;
       //to do cut time
     }
@@ -142,18 +142,19 @@ const timer = () => {
   const callback = function () {
     if (questionIndex < questions.length) {
       if (timeLeft > 1) {
+        timeLeft -= 1;
         countDownTimer.textContent = `${timeLeft} seconds left`;
-        score = timeLeft;
-        timeLeft -= 1;
       } else if (timeLeft === 1) {
-        countDownTimer.textContent = `${timeLeft} second left`;
         timeLeft -= 1;
+        countDownTimer.textContent = `${timeLeft} second left`;
       } else if (timeLeft === 0) {
         countDownTimer.textContent = `times up`;
         clearInterval(timeInterval);
         mainContainer.removeChild(document.getElementById("question"));
         appendQuizCompleteContainer();
       }
+      score = timeLeft;
+      console.log(score);
     }
   };
 
@@ -162,12 +163,12 @@ const timer = () => {
   return timeLeft;
 };
 
-const callbackAgain = (event) => {
+const submitScore = (event) => {
   event.preventDefault();
 
   let highscores = {
     initials: inputInitials.value,
-    // scores: score.value,
+    scores: score,
   };
 
   localStorage.setItem("highscores", JSON.stringify(highscores));
@@ -181,11 +182,11 @@ const startQuiz = () => {
 
   //   mainContainer.removeChild(document.getElementById("question")); - used twice make function
   // to do stop timer when last question answered
-  // penalise for wrong answer clicked
+  // penalise for wrong answer clicked - if target.value matches question correctanswer green if not red + deduct 10 secs
 };
 
 startButton.addEventListener("click", startQuiz);
-submitScoreButton.addEventListener("click", callbackAgain);
+submitScoreButton.addEventListener("click", submitScore);
 console.log(timeLeft);
 
 // function callback(event) {
