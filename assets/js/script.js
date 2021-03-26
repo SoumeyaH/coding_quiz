@@ -5,6 +5,8 @@ const initialItemsContainer = document.getElementById(
 );
 const mainContainer = document.getElementById("main-container");
 const startButton = document.getElementById("initial-start-button");
+const inputInitials = document.createElement("input");
+const submitScoreButton = document.createElement("button");
 
 const questions = [
   {
@@ -30,8 +32,10 @@ const questions = [
 ];
 
 // declaring variables in global
-countDownTimer.textContent = "60 seconds left";
+// countDownTimer.textContent = "60 seconds left";
 let questionIndex = 0;
+let timeLeft;
+let score;
 
 function removeInitialContent() {
   initialItemsContainer.remove();
@@ -50,11 +54,10 @@ const appendQuizCompleteContainer = () => {
   quizCompleteForm.setAttribute("class", "quiz-complete-form");
   quizCompleteHeading.textContent = "Quiz Completed";
 
-  const inputInitials = document.createElement("input");
   inputInitials.setAttribute("class", "input-initials");
+  inputInitials.setAttribute("id", "input-initials");
   inputInitials.setAttribute("placeholder", "Enter Your Initials Here");
 
-  const submitScoreButton = document.createElement("button");
   submitScoreButton.setAttribute("class", "submit-score-button");
   submitScoreButton.textContent = "Submit";
 
@@ -101,7 +104,7 @@ const verifyChoice = (event) => {
       renderQuestion();
     } else {
       // alert("sad times");
-      countDownTimer -= 10;
+      // countDownTimer -= 10;
       //to do cut time
     }
   }
@@ -137,24 +140,37 @@ const timer = () => {
   let timeLeft = 15;
 
   const callback = function () {
-    if (timeLeft > 1) {
-      console.log(timeLeft);
-      countDownTimer.textContent = `${timeLeft} seconds left`;
-      timeLeft -= 1;
-    } else if (timeLeft === 1) {
-      console.log(timeLeft);
-      countDownTimer.textContent = `${timeLeft} second left`;
-      timeLeft -= 1;
-    } else if (timeLeft === 0) {
-      console.log(timeLeft);
-      countDownTimer.textContent = `times up`;
-      clearInterval(timeInterval);
-      mainContainer.removeChild(document.getElementById("question"));
-      appendQuizCompleteContainer();
+    if (questionIndex < questions.length) {
+      if (timeLeft > 1) {
+        countDownTimer.textContent = `${timeLeft} seconds left`;
+        score = timeLeft;
+        timeLeft -= 1;
+      } else if (timeLeft === 1) {
+        countDownTimer.textContent = `${timeLeft} second left`;
+        timeLeft -= 1;
+      } else if (timeLeft === 0) {
+        countDownTimer.textContent = `times up`;
+        clearInterval(timeInterval);
+        mainContainer.removeChild(document.getElementById("question"));
+        appendQuizCompleteContainer();
+      }
     }
   };
 
   const timeInterval = setInterval(callback, 1000);
+  console.log(timeLeft);
+  return timeLeft;
+};
+
+const callbackAgain = (event) => {
+  event.preventDefault();
+
+  let highscores = {
+    initials: inputInitials.value,
+    // scores: score.value,
+  };
+
+  localStorage.setItem("highscores", JSON.stringify(highscores));
 };
 
 const startQuiz = () => {
@@ -169,6 +185,8 @@ const startQuiz = () => {
 };
 
 startButton.addEventListener("click", startQuiz);
+submitScoreButton.addEventListener("click", callbackAgain);
+console.log(timeLeft);
 
 // function callback(event) {
 //   event.preventDefault();
