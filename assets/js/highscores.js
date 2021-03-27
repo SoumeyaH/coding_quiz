@@ -2,10 +2,23 @@ const highScoresContainer = document.getElementById(
   "highscores-main-container"
 );
 
-const highScores = JSON.parse(localStorage.getItem("highscores"));
+const highScores = JSON.parse(localStorage.getItem("listHighScores"));
 console.log(highScores);
 
-const renderHighScore = () => {};
+const sortingHighScores = () => {
+  sortingFunction = (a, b) => {
+    return b.score - a.score;
+  };
+
+  highScores.sort(sortingFunction);
+};
+
+const renderHighScores = () => {
+  sortingHighScores();
+
+  highScoresContainerDiv = document.createElement("div");
+  highScoresContainerDiv.setAttribute("id", "tableHighScores");
+};
 
 const noHighScores = () => {
   const highScoresHeading = document.createElement("h2");
@@ -18,7 +31,7 @@ const isHighScoresAvailable = () => {
   if (highScores === null) {
     noHighScores();
   } else {
-    // render highcores
+    renderHighScores();
   }
 };
 
@@ -30,7 +43,6 @@ window.addEventListener("load", onLoad);
 
 //to do
 //submit button should lead to here
-// on load event listener to start everything
 // then render the highscores
 // highscores should be sorted .sort()
-// clear highscores - eventlistener, function
+// clear highscores - eventlistener, function - add id to button

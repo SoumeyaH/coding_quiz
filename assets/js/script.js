@@ -153,34 +153,42 @@ const timer = () => {
         mainContainer.removeChild(document.getElementById("question"));
         appendQuizCompleteContainer();
       }
+
       score = timeLeft;
-      console.log(score);
     }
   };
 
   const timeInterval = setInterval(callback, 1000);
-  console.log(timeLeft);
   return timeLeft;
+};
+
+const getHighScoreFromLocal = () => {
+  const highScore = localStorage.getItem("highScore");
+
+  if (highScore) {
+    return JSON.parse(highScore);
+  } else {
+    return [];
+  }
+};
+
+const storeTheHighScores = () => {
+  const aHighScore = {
+    initials: inputInitials.value,
+    scores: score,
+  };
+  if (!aHighScore.initials) {
+    alert("Please put in your initials");
+  } else {
+    const listHighScores = getHighScoreFromLocal();
+    listHighScores.push(aHighScore);
+    localStorage.setItem("listHighScores", JSON.stringify(listHighScores));
+  }
 };
 
 const submitScore = (event) => {
   event.preventDefault();
-
-  let highScores = {
-    initials: inputInitials.value,
-    scores: score,
-  };
-
-  if (!highScores.initials) {
-    alert("Please put in your initials");
-  } else {
-    let tablingHighScores = [];
-    tablingHighScores.push(highScores);
-    localStorage.setItem(
-      "tablingHighScores",
-      JSON.stringify(tablingHighScores)
-    );
-  }
+  storeTheHighScores();
 };
 
 const startQuiz = () => {
