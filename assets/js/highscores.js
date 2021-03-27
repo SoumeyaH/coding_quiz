@@ -1,7 +1,33 @@
+const highScoresContainer = document.getElementById(
+  "highscores-main-container"
+);
+
 const highScores = JSON.parse(localStorage.getItem("highscores"));
-console.log(highScores);
+
+const renderHighScore = () => {};
+
+const noHighScores = () => {
+  const highScoresHeading = document.createElement("h2");
+  highScoresHeading.textContent = "Go back and do the quiz to get a score";
+  highScoresContainer.appendChild(highScoresHeading);
+};
+
+const isHighscoresAvailable = () => {
+  if (highScores === null) {
+    noHighScores();
+  } else {
+    // render highscores
+  }
+};
+
+const onLoad = () => {
+  isHighscoresAvailable();
+};
+
+window.addEventListener("load", onLoad);
 
 //to do
+//submit button should lead to here
 // on load event listener to start everything
 // see if theres highscores in local storage
 //if there are none render div no highscores yet go play
