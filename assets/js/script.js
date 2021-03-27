@@ -103,9 +103,7 @@ const verifyChoice = (event) => {
       mainContainer.removeChild(document.getElementById("question"));
       renderQuestion();
     } else {
-      alert("sad times");
-      // countDownTimer -= 10;
-      //to do cut time
+      alert("Wrong try again");
     }
   }
 };
@@ -139,7 +137,7 @@ const renderQuestion = () => {
 const timer = () => {
   let timeLeft = 15;
 
-  const callback = function () {
+  const Ticker = function () {
     if (questionIndex < questions.length) {
       if (timeLeft > 1) {
         timeLeft -= 1;
@@ -158,7 +156,7 @@ const timer = () => {
     }
   };
 
-  const timeInterval = setInterval(callback, 1000);
+  const timeInterval = setInterval(Ticker, 1000);
   return timeLeft;
 };
 
