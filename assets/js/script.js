@@ -166,14 +166,21 @@ const timer = () => {
 const submitScore = (event) => {
   event.preventDefault();
 
-  let highscores = [
-    {
-      initials: inputInitials.value,
-      scores: score,
-    },
-  ];
+  let highScores = {
+    initials: inputInitials.value,
+    scores: score,
+  };
 
-  localStorage.setItem("highscores", JSON.stringify(highscores));
+  if (!highScores.initials) {
+    alert("Please put in your initials");
+  } else {
+    let tablingHighScores = [];
+    tablingHighScores.push(highScores);
+    localStorage.setItem(
+      "tablingHighScores",
+      JSON.stringify(tablingHighScores)
+    );
+  }
 };
 
 const startQuiz = () => {
