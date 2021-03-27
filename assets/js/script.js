@@ -166,10 +166,12 @@ const timer = () => {
 const submitScore = (event) => {
   event.preventDefault();
 
-  let highscores = {
-    initials: inputInitials.value,
-    scores: score,
-  };
+  let highscores = [
+    {
+      initials: inputInitials.value,
+      scores: score,
+    },
+  ];
 
   localStorage.setItem("highscores", JSON.stringify(highscores));
 };
@@ -187,7 +189,6 @@ const startQuiz = () => {
 
 startButton.addEventListener("click", startQuiz);
 submitScoreButton.addEventListener("click", submitScore);
-console.log(timeLeft);
 
 // function callback(event) {
 //   event.preventDefault();
