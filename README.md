@@ -14,6 +14,8 @@
 
 ## Github Pages URL
 
+https://soumeyah.github.io/coding_quiz/
+
 ## Description
 
 ### What Was Done
