@@ -161,7 +161,7 @@ const timer = () => {
 };
 
 const getHighScoreFromLocal = () => {
-  const highScore = localStorage.getItem("highScore");
+  const highScore = localStorage.getItem("listHighScores");
 
   if (highScore) {
     return JSON.parse(highScore);
@@ -189,29 +189,21 @@ const submitScore = (event) => {
   storeTheHighScores();
 };
 
+// Start button quiz click initiates quiz and timer
 const startQuiz = () => {
+  // removes first start page
   removeInitialContent();
 
+  // renders questions if none left invokes function to render quiz complete
   renderQuestion();
+
+  // quiz timer
   timer();
 
-  //   mainContainer.removeChild(document.getElementById("question")); - used twice make function
-  // to do stop timer when last question answered
-  // penalise for wrong answer clicked - if target.value matches question correctanswer green if not red + deduct 10 secs
+  // set local storage to empty array
+  getHighScoreFromLocal();
 };
 
 startButton.addEventListener("click", startQuiz);
-submitScoreButton.addEventListener("click", submitScore);
 
-// function callback(event) {
-//   event.preventDefault();
-//   event.stopPropagation();
-//   console.log(event);
-//to do
-// get score
-// get initials from input
-// make string initials + score
-// store that in local
-// navigate to high-score.html
-// }
-// submitScoreButtonElement.addEventListener("click", callback);
+submitScoreButton.addEventListener("click", submitScore);

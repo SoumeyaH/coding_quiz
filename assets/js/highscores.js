@@ -1,11 +1,15 @@
 const highScoresContainer = document.getElementById(
   "highscores-main-container"
 );
+const containListScore = document.createElement("ul");
+const clearBtn = document.getElementById("clearBtn");
+const listHighScores = JSON.parse(localStorage.getItem("listHighScores"));
 
-const highScores = localStorage.getItem("listHighScores");
-const highScore = JSON.parse(highScores);
+//
 
-console.log(highScores);
+//
+
+//
 
 // const sortingHighScores = () => {
 //   sortingFunction = (a, b) => {
@@ -15,36 +19,51 @@ console.log(highScores);
 //   highScores.sort(sortingFunction);
 // };
 
-// const renderHighScores = () => {
-//   sortingHighScores();
+const constructListItem = () => {
+  const callback = (each) => {
+    const listScore = document.createElement("li");
+    listScore.textContent = `${each.initials} : ${each.scores}`;
+    containListScore.appendChild(listScore);
+  };
 
-//   highScoresContainerDiv = document.createElement("div");
-//   highScoresContainerDiv.setAttribute("id", "tableHighScores");
-// };
+  listHighScores.map(callback);
+};
 
-// const noHighScores = () => {
-//   const highScoresHeading = document.createElement("h2");
-//   highScoresHeading.textContent = "Go back and do the quiz to get a score";
-//   highScoresContainer.appendChild(highScoresHeading);
-//   return [];
-// };
+const renderHighScores = () => {
+  // sortingHighScores();
 
-// const isHighScoresAvailable = () => {
-//   if (highScores === null) {
-//     noHighScores();
-//   } else {
-//     renderHighScores();
-//   }
-// };
+  constructListItem();
+  highScoresContainerDiv = document.createElement("div");
+  highScoresContainerDiv.setAttribute("id", "tableHighScores");
 
-// const onLoad = () => {
-//   isHighScoresAvailable();
-// };
+  highScoresContainerDiv.appendChild(containListScore);
 
-// window.addEventListener("load", onLoad);
+  highScoresContainer.appendChild(highScoresContainerDiv);
+};
 
-//to do
-//submit button should lead to here
-// then render the highscores
-// highscores should be sorted .sort()
-// clear highscores - eventlistener, function - add id to button
+const noHighScores = () => {
+  const highScoresHeading = document.createElement("h2");
+  highScoresHeading.textContent = "Go back and do the quiz to get a score";
+  highScoresContainer.appendChild(highScoresHeading);
+  return [];
+};
+
+const isHighScoresAvailable = () => {
+  if (listHighScores) {
+    renderHighScores();
+  } else {
+    noHighScores();
+  }
+};
+
+const onLoad = () => {
+  isHighScoresAvailable();
+};
+
+const clearLocalStorage = () => {
+  localStorage.clear();
+};
+
+clearBtn.addEventListener("click", clearLocalStorage);
+
+window.addEventListener("load", onLoad);
