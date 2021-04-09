@@ -10,24 +10,36 @@ const submitScoreButton = document.createElement("button");
 
 const questions = [
   {
-    title: "Whats the best star trek show?",
-    choices: ["tos", "tng", "ds9", "voy"],
-    correctAnswer: "ds9",
+    title: "Commonly used data types DO NOT include",
+    choices: ["strings", "booleans", "alerts", "numbers"],
+    correctAnswer: "alerts",
   },
   {
-    title: "whats the best ds9 episode?",
+    title:
+      "Avery useful tool used during development and debugging for printing content to the debugger is",
+    choices: ["Javascript", "terminal/bash", "for loops", "console.log"],
+    correctAnswer: "console.log",
+  },
+  {
+    title:
+      "String values must be enclosed within ____ when being assigned to variables.",
+    choices: ["commas", "curly brackets", "quotes", "parenthesis"],
+    correctAnswer: "quotes",
+  },
+  {
+    title: "Arrays in Javascript can be used to store ____.",
     choices: [
-      "in the pale moonlight",
-      "the visitor",
-      "little green men",
-      "rejoined",
+      "numbers and strings",
+      "other arrays",
+      "booleans",
+      "all of the above",
     ],
-    correctAnswer: "in the pale moonlight",
+    correctAnswer: "all of the above",
   },
   {
-    title: "whose the best captain?",
-    choices: ["kirk", "picard", "sisko", "janeway"],
-    correctAnswer: "sisko",
+    title: "The condition in an if/else statement is enclosed within ____.",
+    choices: ["quotes", "curly brackets", "parenthesis", "square brackets"],
+    correctAnswer: "parenthesis",
   },
 ];
 
