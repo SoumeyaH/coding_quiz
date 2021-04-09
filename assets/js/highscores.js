@@ -62,6 +62,8 @@ const onLoad = () => {
 
 const clearLocalStorage = () => {
   localStorage.clear();
+  highScoresContainer.textContent = "";
+  noHighScores();
 };
 
 clearBtn.addEventListener("click", clearLocalStorage);

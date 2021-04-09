@@ -147,7 +147,7 @@ const renderQuestion = () => {
 };
 
 const timer = () => {
-  let timeLeft = 15;
+  let timeLeft = 60;
 
   const Ticker = function () {
     if (questionIndex < questions.length) {
@@ -199,6 +199,7 @@ const storeTheHighScores = () => {
 const submitScore = (event) => {
   event.preventDefault();
   storeTheHighScores();
+  window.location.assign("../../highscores.html");
 };
 
 // Start button quiz click initiates quiz and timer
